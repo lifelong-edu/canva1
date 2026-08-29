@@ -76,33 +76,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Date Locking Logic (KST 19:00 Precision) ---
-    function applyDateLocking() {
-        const now = new Date();
-
+    // --- Manual Open/Lock States Manager ---
+    function applyOpenStates() {
         navButtons.forEach(btn => {
-            const openDateStr = btn.getAttribute('data-open-date');
+            const targetId = btn.getAttribute('data-target');
             const badgeEl = btn.querySelector('.open-date-badge');
+            const isOpen = tutorialOpenStates[targetId];
 
-            if (!openDateStr) return;
-
-            const openTargetDate = new Date(openDateStr);
-            const isFuture = now < openTargetDate && !isAdminUnlocked;
-
-            // Format date for display: YYYY.MM.DD 19:00
-            const formattedDateDisplay = `${openDateStr.substring(0, 10).replace(/-/g, '.')} 19:00`;
-
-            if (isFuture) {
+            if (!isOpen) {
                 btn.classList.add('locked');
-                if (badgeEl) badgeEl.textContent = `🔒 ${formattedDateDisplay} 오픈`;
+                if (badgeEl) {
+                    badgeEl.textContent = '🔒 비공개';
+                    badgeEl.style.color = '#ef4444';
+                    badgeEl.style.background = 'rgba(239, 68, 68, 0.12)';
+                    badgeEl.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                }
             } else {
                 btn.classList.remove('locked');
-                if (badgeEl) badgeEl.textContent = formattedDateDisplay;
+                if (badgeEl) {
+                    badgeEl.textContent = '공개중';
+                    badgeEl.style.color = 'var(--canva-cyan)';
+                    badgeEl.style.background = 'rgba(0, 196, 204, 0.12)';
+                    badgeEl.style.borderColor = 'rgba(0, 196, 204, 0.25)';
+                }
             }
         });
 
-        // Ensure current active section renders properly (locked or unlocked)
+        // Sync switch UI in control panel modal
+        document.querySelectorAll('.tutorial-onoff-switch').forEach(sw => {
+            const tutId = sw.getAttribute('data-tut-id');
+            sw.checked = !!tutorialOpenStates[tutId];
+        });
+
         switchTutorial(activeTutorialId);
+    }
+
+    function saveOpenStates() {
+        localStorage.setItem(OPEN_STATES_KEY, JSON.stringify(tutorialOpenStates));
     }
 
     // --- Event Listeners Bindings ---
@@ -119,9 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isLocked = btn.classList.contains('locked');
 
                 if (isLocked) {
-                    const openDateStr = btn.getAttribute('data-open-date');
-                    showToast(`🔒 이 튜토리얼은 ${openDateStr}에 공개됩니다.`);
-                    renderLockedView(targetId, openDateStr);
+                    showToast(`🔒 이 튜토리얼은 강사/관리자에 의해 비공개 처리되어 있습니다.`);
+                    renderLockedView(targetId);
                     setActiveNav(btn);
                     return;
                 }
@@ -132,30 +141,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Admin Password Modal Logic (Passcode: 106406)
         const openAdminModalBtn = document.getElementById('open-admin-modal-btn');
-        const closeAdminModalBtn = document.getElementById('close-admin-modal-btn');
         const adminModal = document.getElementById('admin-modal');
+        const adminAuthView = document.getElementById('admin-auth-view');
+        const adminControlView = document.getElementById('admin-control-view');
         const adminAuthForm = document.getElementById('admin-auth-form');
         const adminPasswordInput = document.getElementById('admin-password-input');
 
         const ADMIN_PASSCODE = '106406';
-
-        // Check if admin mode was previously unlocked in localStorage session
-        if (localStorage.getItem('canva_admin_session_unlocked') === 'true') {
-            isAdminUnlocked = true;
-            updateAdminButtonUI();
-        }
+        let isAuthenticatedAdmin = localStorage.getItem('canva_admin_authenticated') === 'true';
 
         if (openAdminModalBtn) {
             openAdminModalBtn.addEventListener('click', () => {
-                if (isAdminUnlocked) {
-                    // Toggle back to normal student mode
-                    isAdminUnlocked = false;
-                    localStorage.removeItem('canva_admin_session_unlocked');
-                    updateAdminButtonUI();
-                    applyDateLocking();
-                    showToast('🔒 일반 수강생 모드로 전환되었습니다.');
+                if (isAuthenticatedAdmin) {
+                    // Directly open control panel
+                    adminAuthView.style.display = 'none';
+                    adminControlView.style.display = 'block';
+                    adminModal.classList.add('active');
                 } else {
-                    // Open modal for passcode
+                    // Open password prompt
+                    adminAuthView.style.display = 'block';
+                    adminControlView.style.display = 'none';
                     adminPasswordInput.value = '';
                     adminModal.classList.add('active');
                     setTimeout(() => adminPasswordInput.focus(), 100);
@@ -163,11 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        if (closeAdminModalBtn) {
-            closeAdminModalBtn.addEventListener('click', () => {
+        // Close modal buttons
+        document.querySelectorAll('.close-modal-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
                 adminModal.classList.remove('active');
             });
-        }
+        });
 
         if (adminModal) {
             adminModal.addEventListener('click', (e) => {
@@ -177,32 +183,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // Password submit
         if (adminAuthForm) {
             adminAuthForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const inputVal = adminPasswordInput.value.trim();
 
                 if (inputVal === ADMIN_PASSCODE) {
-                    isAdminUnlocked = true;
-                    localStorage.setItem('canva_admin_session_unlocked', 'true');
-                    adminModal.classList.remove('active');
-                    updateAdminButtonUI();
-                    applyDateLocking();
-                    showToast('🔓 [관리자 인증 성공] 모든 튜토리얼이 해제되었습니다!');
+                    isAuthenticatedAdmin = true;
+                    localStorage.setItem('canva_admin_authenticated', 'true');
+                    adminAuthView.style.display = 'none';
+                    adminControlView.style.display = 'block';
+                    showToast('🔓 [관리자 인증 성공] 튜토리얼 제어판이 열렸습니다!');
                 } else {
-                    alert('비밀번호가 올바르지 않습니다. 다시 확인해 주세요.');
+                    alert('비밀번호가 올바르지 않습니다 (힌트: 106406).');
                     adminPasswordInput.value = '';
                     adminPasswordInput.focus();
                 }
             });
         }
 
-        function updateAdminButtonUI() {
-            if (!openAdminModalBtn) return;
-            if (isAdminUnlocked) {
-                openAdminModalBtn.innerHTML = `<i class="fa-solid fa-lock"></i> 관리자 모드 종료`;
-                openAdminModalBtn.classList.add('unlocked');
-            } else {
                 openAdminModalBtn.innerHTML = `<i class="fa-solid fa-key"></i> 관리자 모드 진입`;
                 openAdminModalBtn.classList.remove('unlocked');
             }
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Render locked screen overlay when clicking a locked tutorial
-    function renderLockedView(targetId, openDateStr) {
+    function renderLockedView(targetId) {
         activeTutorialId = targetId;
 
         tutorialSections.forEach(sec => {
@@ -291,12 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!existingLockCard) {
                     existingLockCard = document.createElement('div');
                     existingLockCard.className = 'locked-card';
-                    const displayFormattedDate = `${openDateStr.substring(0, 10).replace(/-/g, '.')} 19:00 (오후 7시)`;
                     existingLockCard.innerHTML = `
                         <i class="fa-solid fa-lock lock-main-icon"></i>
-                        <h3>아직 공개되지 않은 튜토리얼입니다</h3>
-                        <p>정해진 개강 일정에 맞춰 순차적으로 튜토리얼이 오픈됩니다.</p>
-                        <div class="locked-date-highlight"><i class="fa-regular fa-calendar-check"></i> 공개 예정 일시: ${displayFormattedDate}</div>
+                        <h3>현재 비공개 상태인 튜토리얼입니다</h3>
+                        <p>강사/관리자가 튜토리얼 공개(ON) 설정을 켜면 학습할 수 있습니다.</p>
+                        <div class="locked-date-highlight"><i class="fa-solid fa-user-lock"></i> 관리자 제어판에서 공개 전환 가능</div>
                     `;
                     sec.appendChild(existingLockCard);
                 } else {
@@ -308,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (tutorialTitles[targetId]) {
-            currentBadge.textContent = `${tutorialTitles[targetId].num} (잠김)`;
+            currentBadge.textContent = `${tutorialTitles[targetId].num} (비공개)`;
             currentTitle.textContent = tutorialTitles[targetId].title;
         }
 
@@ -318,13 +317,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Switch Active Tutorial ---
     function switchTutorial(targetId) {
         activeTutorialId = targetId;
-        const targetBtn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
-        const isLocked = targetBtn && targetBtn.classList.contains('locked');
+        const isOpen = tutorialOpenStates[targetId];
 
-        if (isLocked) {
-            const openDateStr = targetBtn.getAttribute('data-open-date');
-            renderLockedView(targetId, openDateStr);
-            setActiveNav(targetBtn);
+        if (!isOpen) {
+            renderLockedView(targetId);
+            const targetBtn = document.querySelector(`.nav-btn[data-target="${targetId}"]`);
+            if (targetBtn) setActiveNav(targetBtn);
             return;
         }
 

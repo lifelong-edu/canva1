@@ -38,46 +38,46 @@
             </div>
 
             <nav class="nav-menu">
-                <button class="nav-btn active" data-target="tutorial-1" data-open-date="2026-09-09T19:00:00">
+                <button class="nav-btn active" data-target="tutorial-1">
                     <span class="nav-num">01</span>
                     <span class="nav-title">그리드, 프레임 & 글씨효과</span>
-                    <span class="open-date-badge">2026.09.09 19:00</span>
+                    <span class="open-date-badge">공개중</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t1"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-2" data-open-date="2026-09-16T19:00:00">
+                <button class="nav-btn" data-target="tutorial-2">
                     <span class="nav-num">02</span>
                     <span class="nav-title">POP 글씨 홍보물</span>
-                    <span class="open-date-badge">2026.09.16 19:00</span>
+                    <span class="open-date-badge">비공개</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t2"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-3" data-open-date="2026-09-23T19:00:00">
+                <button class="nav-btn" data-target="tutorial-3">
                     <span class="nav-num">03</span>
                     <span class="nav-title">디지털아트 & 목업 3가지</span>
-                    <span class="open-date-badge">2026.09.23 19:00</span>
+                    <span class="open-date-badge">비공개</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t3"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-4" data-open-date="2026-09-30T19:00:00">
+                <button class="nav-btn" data-target="tutorial-4">
                     <span class="nav-num">04</span>
                     <span class="nav-title">특수 미러링 효과 상세페이지</span>
-                    <span class="open-date-badge">2026.09.30 19:00</span>
+                    <span class="open-date-badge">비공개</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t4"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-5" data-open-date="2026-10-07T19:00:00">
+                <button class="nav-btn" data-target="tutorial-5">
                     <span class="nav-num">05</span>
                     <span class="nav-title">재밌는 스탑모션 영상</span>
-                    <span class="open-date-badge">2026.10.07 19:00</span>
+                    <span class="open-date-badge">비공개</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t5"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-6" data-open-date="2026-10-14T19:00:00">
+                <button class="nav-btn" data-target="tutorial-6">
                     <span class="nav-num">06</span>
                     <span class="nav-title">돈버는 디지털 워크시트지</span>
-                    <span class="open-date-badge">2026.10.14 19:00</span>
+                    <span class="open-date-badge">비공개</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t6"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-7" data-open-date="2026-10-21T19:00:00">
+                <button class="nav-btn" data-target="tutorial-7">
                     <span class="nav-num">07</span>
                     <span class="nav-title">캔바 AI로 작품 5개+</span>
-                    <span class="open-date-badge">2026.10.21 19:00</span>
+                    <span class="open-date-badge">비공개</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t7"></i>
                 </button>
             </nav>
@@ -747,21 +747,70 @@
         </main>
     </div>
 
-    <!-- Admin Password Modal -->
+    <!-- Admin Password Modal & Control Panel -->
     <div id="admin-modal" class="modal-overlay">
-        <div class="modal-card">
+        <div class="modal-card admin-panel-card">
             <div class="modal-header">
-                <i class="fa-solid fa-user-shield"></i>
-                <h3>관리자 인증</h3>
+                <i class="fa-solid fa-sliders"></i>
+                <h3>강사/관리자 제어판</h3>
             </div>
-            <p>관리자 암호를 입력하면 모든 튜토리얼이 해제됩니다.</p>
-            <form id="admin-auth-form">
-                <input type="password" id="admin-password-input" placeholder="비밀번호 입력" autocomplete="off" required>
-                <div class="modal-actions">
-                    <button type="button" id="close-admin-modal-btn" class="modal-cancel-btn">취소</button>
-                    <button type="submit" class="modal-submit-btn">인증하기</button>
+            
+            <!-- Auth Form View -->
+            <div id="admin-auth-view">
+                <p>비밀번호(106406)를 입력하면 튜토리얼 개별 공개 설정이 활성화됩니다.</p>
+                <form id="admin-auth-form">
+                    <input type="password" id="admin-password-input" placeholder="비밀번호 입력" autocomplete="off" required>
+                    <div class="modal-actions">
+                        <button type="button" class="close-modal-btn modal-cancel-btn">취소</button>
+                        <button type="submit" class="modal-submit-btn">인증하기</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Management Control Panel View (Shown after authentication) -->
+            <div id="admin-control-view" style="display: none;">
+                <p class="panel-subtitle">수강생에게 공개할 튜토리얼을 켜거나(ON) 끌(OFF) 수 있습니다.</p>
+                
+                <div class="quick-bulk-actions">
+                    <button type="button" id="bulk-open-all-btn" class="bulk-btn bulk-open"><i class="fa-solid fa-lock-open"></i> 전체 공개</button>
+                    <button type="button" id="bulk-lock-all-btn" class="bulk-btn bulk-lock"><i class="fa-solid fa-lock"></i> 1단계만 공개 (나머지 비공개)</button>
                 </div>
-            </form>
+
+                <div class="toggle-list-container">
+                    <div class="toggle-item">
+                        <span>01 그리드, 프레임 & 글씨효과</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-1" checked><span class="slider round"></span></label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>02 POP 글씨 홍보물</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-2"><span class="slider round"></span></label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>03 디지털아트 & 목업 3가지</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-3"><span class="slider round"></span></label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>04 특수 미러링 효과 상세페이지</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-4"><span class="slider round"></span></label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>05 재밌는 스탑모션 영상</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-5"><span class="slider round"></span></label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>06 돈버는 디지털 워크시트지</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-6"><span class="slider round"></span></label>
+                    </div>
+                    <div class="toggle-item">
+                        <span>07 캔바 AI로 작품 5개+</span>
+                        <label class="switch"><input type="checkbox" class="tutorial-onoff-switch" data-tut-id="tutorial-7"><span class="slider round"></span></label>
+                    </div>
+                </div>
+
+                <div class="modal-actions" style="margin-top: 20px;">
+                    <button type="button" class="close-modal-btn modal-cancel-btn">닫기</button>
+                </div>
+            </div>
         </div>
     </div>
 
