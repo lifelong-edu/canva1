@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캔바(Canva) 기초과정 7단계 마스터 튜토리얼</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-badge"><i class="fa-solid fa-palette"></i></div>
+                <div class="logo-text">
+                    <h2>Canva 기초</h2>
+                    <span>기초과정 7단계 챌린지</span>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-header">
+                    <span>전체 달성률</span>
+                    <span id="overall-progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="overall-progress-bar"></div>
+                </div>
+                <div class="progress-stats">
+                    <span id="completed-count">0</span> / 7개 미션 완료
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-target="tutorial-1" data-open-date="2026-09-09">
+                    <span class="nav-num">01</span>
+                    <span class="nav-title">그리드, 프레임 & 글씨효과</span>
+                    <span class="open-date-badge">2026.09.09</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t1"></i>
+                </button>
+                <button class="nav-btn" data-target="tutorial-2" data-open-date="2026-09-16">
+                    <span class="nav-num">02</span>
+                    <span class="nav-title">POP 글씨 홍보물</span>
+                    <span class="open-date-badge">2026.09.16</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t2"></i>
+                </button>
+                <button class="nav-btn" data-target="tutorial-3" data-open-date="2026-09-23">
+                    <span class="nav-num">03</span>
+                    <span class="nav-title">디지털아트 & 목업 3가지</span>
+                    <span class="open-date-badge">2026.09.23</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t3"></i>
+                </button>
+                <button class="nav-btn" data-target="tutorial-4" data-open-date="2026-09-30">
+                    <span class="nav-num">04</span>
+                    <span class="nav-title">특수 미러링 효과 상세페이지</span>
+                    <span class="open-date-badge">2026.09.30</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t4"></i>
+                </button>
+                <button class="nav-btn" data-target="tutorial-5" data-open-date="2026-10-07">
+                    <span class="nav-num">05</span>
+                    <span class="nav-title">재밌는 스탑모션 영상</span>
+                    <span class="open-date-badge">2026.10.07</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t5"></i>
+                </button>
+                <button class="nav-btn" data-target="tutorial-6" data-open-date="2026-10-14">
+                    <span class="nav-num">06</span>
+                    <span class="nav-title">돈버는 디지털 워크시트지</span>
+                    <span class="open-date-badge">2026.10.14</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t6"></i>
+                </button>
+                <button class="nav-btn" data-target="tutorial-7" data-open-date="2026-10-21">
+                    <span class="nav-num">07</span>
+                    <span class="nav-title">캔바 AI로 작품 5개+</span>
+                    <span class="open-date-badge">2026.10.21</span>
+                    <i class="fa-solid fa-circle-check check-icon" id="check-t7"></i>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="toggle-admin-mode" class="admin-mode-btn" style="display: none;"><i class="fa-solid fa-unlock-keyhole"></i> [관리자/강사] 전체 잠금 해제</button>
+                <button id="reset-progress-btn" class="reset-btn"><i class="fa-solid fa-rotate-left"></i> 진도율 초기화</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <span class="badge" id="current-badge">CHALLENGE #1</span>
+                    <h1 id="current-title">그리드, 프레임, 글씨효과 사용한 작품만들기</h1>
+                </div>
+                <div class="header-right">
+                    <button id="theme-toggle-btn" class="theme-toggle-btn">
+                        <i class="fa-solid fa-sun"></i> 라이트 모드
+                    </button>
+                    <button id="toggle-all-check" class="action-header-btn">
+                        <i class="fa-solid fa-check-double"></i> 이 튜토리얼 완료하기
+                    </button>
+                </div>
+            </header>
+
+            <!-- Tutorial Content Containers -->
+            <div class="content-body">
+
+                <!-- TUTORIAL 1 -->
+                <section id="tutorial-1" class="tutorial-section active">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-shapes"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>캔바(Canva)의 핵심 레이아웃 도구인 <strong>'그리드(Grids)'</strong>와 <strong>'프레임(Frames)'</strong>을 활용하여 깔끔한 사진 배치를 완성하고, <strong>네온/곡선/스플라이스/그림자 등 다양한 글씨 효과(Text Effects)</strong>를 적용해 감각적인 모던 갤러리 포스터를 만듭니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 1</span>
+                                <h4>캔바 캔버스 생성 및 그리드 레이아웃 배치</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>캔바 홈 화면 우측 상단 <strong>[디자인 만들기]</strong> 버튼 클릭 후 <code>세로형 포스터 (1080 x 1920 px)</code> 또는 <code>인스타그램 게시물 (1080 x 1080 px)</code>을 선택합니다.</li>
+                                    <li>좌측 메뉴 바에서 <strong>[요소 (Elements)]</strong> 탭을 클릭합니다.</li>
+                                    <li>검색창에 <code>그리드</code> 또는 <code>Grid</code>를 입력하거나 하단 <strong>'그리드'</strong> 항목의 [전체 보기]를 클릭합니다.</li>
+                                    <li>3~4개의 공간으로 나뉜 <strong>분할 그리드(예: 상단 대형 1개 + 하단 소형 2개)</strong>를 선택하여 작업 공간에 넣습니다.</li>
+                                </ol>
+                                <div class="tip-box">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                    <div><strong>핵심 팁:</strong> 그리드는 캔버스 전체에 자동으로 꽉 차며, 각 영역의 크기는 경계선을 드래그하여 자유롭게 조절할 수 있습니다.</div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 2</span>
+                                <h4>프레임(Frame)과 요소 사진 채우기</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li><strong>프레임 검색 및 작업창 추가 방법:</strong>
+                                        <ol style="margin-top: 6px; padding-left: 20px; font-size: 0.9rem;">
+                                            <li>좌측 메뉴바에서 <strong>[요소 (Elements)]</strong> 탭을 클릭합니다.</li>
+                                            <li>검색창 아래로 스크롤하여 <strong>'프레임 (Frames)'</strong> 카테고리를 찾거나, 검색창에 <code>프레임</code> 또는 <code>Frame</code> (예: <code>원형 프레임</code>, <code>찢어진 종이</code>, <code>아치</code>, <code>알파벳</code>)을 검색한 후 <strong>[모두 보기]</strong>를 클릭합니다.</li>
+                                            <li>목록에서 초원/구름 배경이 들어간 원하는 형태의 프레임을 클릭하거나 작업 캔버스 중앙으로 드래그하여 배치합니다.</li>
+                                        </ol>
+                                    </li>
+                                    <li>좌측 <strong>[사진]</strong> 탭 또는 <strong>[업로드]</strong> 메뉴에서 원하는 고화질 사진을 선택합니다.</li>
+                                    <li>사진을 드래그하여 그리드 각 칸과 중앙 프레임 위로 끌고 가면 사진이 프레임 내부로 쏙 들어갑니다.</li>
+                                    <li>프레임 안 들어간 사진을 <strong>더블 클릭</strong>하여 사진의 위치(구도)와 크기를 미세 조절합니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 3</span>
+                                <h4>텍스트 추가 및 4가지 입체 글씨 효과 적용하기</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>좌측 <strong>[텍스트]</strong> 메뉴에서 [제목 추가]를 클릭하여 메인 타이틀 문구를 입력합니다 (예: <code>MODERN ART GALLERY</code>).</li>
+                                    <li>상단 폰트 선택창에서 가독성이 뛰어난 두꺼운 산세리프 폰트(예: <code>Pretendard ExtraBold</code>, <code>Black Han Sans</code>, <code>Montserrat</code>)를 선택합니다.</li>
+                                    <li>텍스트를 선택한 상태에서 상단 도구 모음의 <strong>[효과 (Effects)]</strong> 버튼을 클릭합니다.</li>
+                                    <li>상황에 따른 글씨 효과 레시피를 적용합니다:
+                                        <div class="recipe-grid">
+                                            <div class="recipe-item">
+                                                <span class="recipe-name"><i class="fa-solid fa-bolt"></i> 네온 (Neon)</span>
+                                                <p>야경, 클럽, 화려한 강조 문구에 적합. 강도 50~80 설정 후 밝은 형광색 지정.</p>
+                                            </div>
+                                            <div class="recipe-item">
+                                                <span class="recipe-name"><i class="fa-solid fa-layer-group"></i> 스플라이스 (Splice)</span>
+                                                <p>세련된 아웃라인+그림자 효과. 두께 50, 오프셋 40, 주황/파랑 대비 색상 설정.</p>
+                                            </div>
+                                            <div class="recipe-item">
+                                                <span class="recipe-name"><i class="fa-solid fa-compass-drafting"></i> 곡선 (Curve)</span>
+                                                <p>하단 [형형 (Shape)] 옵션에서 곡선 선택. 둥근 프레임이나 아치 주변을 감싸도록 곡률 조절.</p>
+                                            </div>
+                                            <div class="recipe-item">
+                                                <span class="recipe-name"><i class="fa-solid fa-ghost"></i> 그림자 (Shadow)</span>
+                                                <p>사진 배경 위에 글자를 명확히 돋보이게 하기 위해 오프셋 50, 흐림 30, 투명도 40 지정.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트 & 저장하기</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="1">
+                                    <li><label><input type="checkbox" class="task-check"> 그리드를 활용하여 3개 이상의 사진 영역 분할 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 특수 프레임(원형/찢어진종이 등)을 중앙 또는 포인트 위치에 배치 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> [효과] 메뉴에서 최소 2가지 이상의 글씨 효과(네온/곡선 등) 성공적 적용</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> PNG 또는 PDF 표준 파일로 내보내기 완료</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL 2 -->
+                <section id="tutorial-2" class="tutorial-section">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>시선을 한눈에 사로잡는 <strong>POP(Point of Purchase) 글씨체</strong>와 톡톡 튀는 테두리/입체 효과, 손글씨 느낌의 스티커 요소를 조합하여 <strong>매장 할인 이벤트, 카페 신메뉴, 팝업스토어 홍보 포스터</strong>를 제작합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 1</span>
+                                <h4>POP 느낌의 두껍고 귀여운 폰트 선정 및 텍스트 구성</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>캔버스 크기: <code>A4 세로 (210 x 297 mm)</code> 또는 <code>인스타그램 포스터</code>로 시작합니다.</li>
+                                    <li>배경색을 눈에 잘 띄는 <strong>상큼한 노란색(예: #FFD500)</strong> 또는 <strong>비비드 오렌지(#FF5E00)</strong>로 변경합니다.</li>
+                                    <li>핵심 이벤트 문구를 크게 입력합니다 (예: <code>파격세일 50%</code>, <code>신메뉴 출시!</code>, <code>오늘만 이가격</code>).</li>
+                                    <li>캔바 폰트 목록에서 POP 스타일에 어울리는 두껍고 친근한 폰트를 검색하여 변경합니다:
+                                        <div class="font-tag-container">
+                                            <span class="font-tag">여기어때 잘난체</span>
+                                            <span class="font-tag">티몬 소리체</span>
+                                            <span class="font-tag">배달의민족 도현체</span>
+                                            <span class="font-tag">Sandoll 호빵체</span>
+                                            <span class="font-tag">Gmarket Sans Bold</span>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 2</span>
+                                <h4>POP 핵심! 2중 외곽선(테두리) & 입체 테두리 효과 만들기</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li><strong>1차 윤곽선 적용:</strong> 텍스트 클릭 ➔ <strong>[효과]</strong> ➔ <strong>[윤곽선 (Outline)]</strong> 선택. 테두리 두께를 <code>70~100</code>으로 두껍게 주고, 색상을 <strong>'흰색(#FFFFFF)'</strong>으로 설정합니다.</li>
+                                    <li><strong>2차 검은색 외곽선(복제 기법):</strong>
+                                        <ul>
+                                            <li>완성된 1차 텍스트를 선택하고 <code>Ctrl + D</code> (복제) 합니다.</li>
+                                            <li>복제된 텍스트의 효과를 <strong>[윤곽선]</strong> ➔ 두께 <code>100</code>, 색상을 <strong>'검은색(#000000)'</strong>으로 지정합니다.</li>
+                                            <li>검은색 텍스트를 맨 뒤로 보내기(<code>Ctrl + [</code>)한 후, 흰색 텍스트 바로 뒤에 겹치면 완성도 높은 POP 2중 테두리가 완성됩니다!</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>스플라이스(Splice)를 활용한 쉬운 입체 POP:</strong>
+                                        <ul>
+                                            <li>텍스트 클릭 ➔ <strong>[효과]</strong> ➔ <strong>[스플라이스]</strong> 선택.</li>
+                                            <li>두께 50 / 오프셋 50 / 방향 -45도 / 내부색상은 노랑, 테두리색은 검은색으로 설정.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 3</span>
+                                <h4>POP 분위기를 극대화하는 요소 스티커 및 리본 배치</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>[요소] 탭 검색창에 다음 키워드를 검색합니다:
+                                        <div class="copy-box">
+                                            <code>폭발 스티커</code>, <code>말풍선</code>, <code>할인 배너</code>, <code>POP 리본</code>, <code>손글씨 화살표</code>, <code>반짝이 그래픽</code>
+                                        </div>
+                                    </li>
+                                    <li>가격 강조 박스(예: <code>9,900원</code>) 뒤에 빨간색 강렬한 폭발 모양 스티커 요소를 배치합니다.</li>
+                                    <li>글자 각도를 약간 비스듬하게(5~10도 회전) 기울여 생동감 있고 역동적인 느낌을 연출합니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="2">
+                                    <li><label><input type="checkbox" class="task-check"> 가독성 높고 두꺼운 POP 폰트 적용 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> [효과] 메뉴의 윤곽선 또는 2중 복제 외곽선으로 선명한 테두리 제작 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 폭발 스티커, 말풍선, 리본 등 강조 그래픽 요소 2개 이상 추가</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 비비드한 배경색과 대비되는 고시인성 컬러 조합 완성</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL 3 -->
+                <section id="tutorial-3" class="tutorial-section">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-laptop"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>키워드를 활용하여 프롬프트로 고품질 <strong>디지털 아트(Digital Art)</strong>를 생성하고, 이를 실제 제품에 적용된 것처럼 보여주는 <strong>목업(Mockup) 합성 노하우 3가지 방법</strong>을 익깁니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 1</span>
+                                <h4>키워드로 디지털 아트 그래픽 생성/수집</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>캔바 왼쪽 앱 메뉴 ➔ <strong>[Magic Media (매직 미디어)]</strong> 또는 <strong>[요소]</strong> 검색을 엽니다.</li>
+                                    <li>디지털 아트 생성을 위해 아래 키워드 예시를 프롬프트창에 복사하여 입력합니다:
+                                        <div class="prompt-code-block">
+                                            <span class="prompt-text" id="prompt-t3">Cyberpunk neon city sunset, 3D synthwave aesthetic, isometric digital illustration, highly detailed, vibrant cyan and magenta gradient --ar 1:1</span>
+                                            <button class="copy-btn" data-copy="prompt-t3"><i class="fa-regular fa-copy"></i> 프롬프트 복사</button>
+                                        </div>
+                                    </li>
+                                    <li>생성된 아트워크 중 가장 마음에 드는 이미지를 캔버스에 추가하고 PNG 파일로 저장합니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 2</span>
+                                <h4>디지털 아트를 목업에 넣는 3가지 방법</h4>
+                            </div>
+                            <div class="step-body">
+                                <div class="method-card-grid">
+                                    <div class="method-card">
+                                        <div class="method-badge">방법 1</div>
+                                        <h5>Canva 스마트목업 (Smartmockups) 자동 합성</h5>
+                                        <ol>
+                                            <li>디지털 아트 이미지를 클릭하고 상단 <strong>[사진 편집 (Edit Photo)]</strong>을 클릭합니다.</li>
+                                            <li>효과 탭에서 <strong>[Smartmockups]</strong> 메뉴를 선택합니다.</li>
+                                            <li><code>스마트폰</code>, <code>노트북</code>, <code>티셔츠</code>, <code>액자</code>, <code>머그컵</code> 중 원하는 제품 선택.</li>
+                                            <li>클릭 한 번으로 이미지가 제품에 입혀지는 자동 합성 완료!</li>
+                                        </ol>
+                                    </div>
+
+                                    <div class="method-card">
+                                        <div class="method-badge">방법 2</div>
+                                        <h5>목업 전용 프레임(Frame) 활용 합성</h5>
+                                        <ol>
+                                            <li>[요소] 탭에서 <code>컴퓨터 프레임</code>, <code>아이패드 프레임</code>, <code>액자 프레임</code>을 검색하여 배치합니다.</li>
+                                            <li>내 디지털 아트 이미지를 해당 디바이스 화면 프레임 안으로 드래그하여 집어넣습니다.</li>
+                                            <li>투명도나 약간의 그림자 요소를 추가하여 이질감을 줄여줍니다.</li>
+                                        </ol>
+                                    </div>
+
+                                    <div class="method-card">
+                                        <div class="method-badge">방법 3</div>
+                                        <h5>누끼(배경제거) PNG + 블렌딩 직접 합성</h5>
+                                        <ol>
+                                            <li>[요소]에서 빈 액자나 액티비티 목업 이미지(배경이 포함된 실제 사진)를 불러옵니다.</li>
+                                            <li>내 디지털 아트의 <strong>투명도(Opacity)를 85~90%</strong>로 살짝 낮추거나 <strong>[위치] ➔ 레이어 조절</strong>로 액자 프레임 안쪽에 정밀 배치합니다.</li>
+                                            <li>상단에 '유리 반사 광원 (Glass Reflection)' 요소를 얹어 현실감을 200% 극대화합니다.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="3">
+                                    <li><label><input type="checkbox" class="task-check"> 키워드 프롬프트로 디지털아트 이미지 준비 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> [방법 1] 스마트목업(Smartmockups) 기능으로 디바이스/의류 합성 성공</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> [방법 2] 디바이스 프레임 요소를 이용한 직접 드래그 합성 완성</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> [방법 3] 투명도 및 레이어 조절을 이용한 액자/현실 목업 합성 완료</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL 4 -->
+                <section id="tutorial-4" class="tutorial-section">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-sliders"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>포토샵 고급 테크닉이었던 <strong>'바닥 바반사 미러링(Mirror Reflection) 효과'</strong>와 <strong>'그라데이션 그림자'</strong>를 캔바에서 그대로 구현하여 프리미엄 화장품/전자제품/수제화 상세페이지 메인 이미지를 고급스럽게 연출합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 1</span>
+                                <h4>제품 이미지 준비 및 누끼(배경 제거) 처리</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>상세페이지용 세로 캔버스 <code>860 x 1200 px</code> (스마트스토어/쿠팡 표준)를 만듭니다.</li>
+                                    <li>고급스러운 어두운 배경(대리석 패턴 또는 신비로운 오페라 퍼플/매트 블랙)을 설치합니다.</li>
+                                    <li>메인 제품 사진(예: 향수병, 무선 이어폰, 스킨케어 병)을 불러옵니다.</li>
+                                    <li>이미지 선택 ➔ <strong>[사진 편집]</strong> ➔ <strong>[BG Remover (배경 제거사)]</strong> 클릭하여 제품만 선명하게 따냅니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 2</span>
+                                <h4>포토샵 스타일 미러링 (거울 반사) 효과 3단계 완성법</h4>
+                            </div>
+                            <div class="step-body">
+                                <div class="mirror-steps">
+                                    <div class="m-step">
+                                        <div class="m-num">1</div>
+                                        <div class="m-text">
+                                            <strong>제품 이미지 복제 및 상하 뒤집기</strong>
+                                            <p>누끼 딴 제품 이미지를 선택하고 <code>Ctrl + D</code>로 복제한 후, 상단 <strong>[뒤집기 (Flip)] ➔ [세로로 뒤집기 (Flip Vertical)]</strong>를 실행합니다.</p>
+                                        </div>
+                                    </div>
+                                    <div class="m-step">
+                                        <div class="m-num">2</div>
+                                        <div class="m-text">
+                                            <strong>위치 맞추기 및 레이어 순서 지정</strong>
+                                            <p>뒤집힌 복제 제품을 원본 제품의 바로 아래 바닥면 접점에 꼭 맞게 밀착시킵니다. 그 후 뒤집힌 이미지를 <code>Ctrl + [</code>로 원본 뒤로 보냅니다.</p>
+                                        </div>
+                                    </div>
+                                    <div class="m-step">
+                                        <div class="m-num">3</div>
+                                        <div class="m-text">
+                                            <strong>투명도 조절 & 그래디언트 마스크(Gradient Mask) 처리</strong>
+                                            <p>뒤집힌 반사 이미지의 <strong>투명도(Transparency)를 35% ~ 45%</strong>로 낮춥니다. 더 자연스럽게 만으려면 [요소]에서 <code>투명 그라데이션 (Gradient Blur)</code> 요소를 가져와 반사 이미지 하단에 덮어주면 아래로 갈수록 아득히 사라지는 완벽한 미러링이 완성됩니다!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 3</span>
+                                <h4>바닥 입체 접점 그림자(Drop Shadow) 추가</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>[요소] 탭에서 <code>Oval Shadow</code> 또는 <code>Drop Shadow</code> 또는 <code>타원 그림자</code>를 검색합니다.</li>
+                                    <li>검은색 아른거리는 타원 그림자를 제품 밑 바닥 접촉면에 넓게 깔아주어 제품이 공중에 떠 있지 않고 묵직하게 안착된 효과를 줍니다.</li>
+                                    <li>고급스러운 로고 텍스트와 <code>PREMIUM EDITION</code> 문구를 반사면 주변에 배치합니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="4">
+                                    <li><label><input type="checkbox" class="task-check"> 제품 누끼(배경 제거) 깔끔하게 처리 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 세로 뒤집기 + 원본 하단 접점 위치 정렬 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 투명도(30~40%) 및 그라데이션으로 자연스러운 반사 미러링 연출 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 바닥 타원 그림자(Drop Shadow)를 추가하여 입체감 부여 완료</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL 5 -->
+                <section id="tutorial-5" class="tutorial-section">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-film"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>페이지 복제 기능과 0.1~0.3초 단위의 미세 타이밍 조절을 통해, 별도의 복잡한 영상 편집 툴 없이 캔바만으로 인스타그램 릴스/숏폼용 <strong>톡톡 튀는 스탑모션(Stop-Motion) 애니메이션 영상</strong>을 제작합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 1</span>
+                                <h4>스탑모션 컨셉 설정 및 1번 프레임 디자인</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>캔버스 크기: <code>모바일 동영상 (1080 x 1920 px)</code>을 선택합니다.</li>
+                                    <li>스탑모션 주제를 선정합니다 (예: <code>커피 잔에 커피가 조금씩 차오르는 효과</code>, <code>글자가 한 글자씩 살아 움직이는 효과</code>, <code>캐릭터가 껑충껑충 뛰는 효과</code>, <code>상자 뚜껑이 열리며 상품이 튀어나오는 효과</code>).</li>
+                                    <li>1번 페이지에 시작 요소(예: 닫힌 선물 상자 스티커)를 배치하고 위치를 잡습니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 2</span>
+                                <h4>페이지 연속 복제(Duplicate) & 미세 변형(Move/Rotate)</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>하단 타임라인/페이지 그리드 보기에서 1번 페이지 상단의 <strong>[페이지 복제 (Duplicate)]</strong> 아이콘(또는 <code>Ctrl + D</code>)을 누릅니다.</li>
+                                    <li>복제된 2번 페이지의 요소를 <strong>아주 조금 이동</strong>시키거나 <strong>회전(3~5도)</strong>, 또는 <strong>크기를 약간 확대/축소</strong>합니다.</li>
+                                    <li>다시 2번 페이지를 복제하여 3번 페이지를 만들고, 똑같이 미세하게 이동시킵니다.</li>
+                                    <li>이 과정을 <strong>10~15개 페이지</strong> 이상 반복하여 프레임 바이 프레임(Frame-by-frame) 움직임을 완성합니다.
+                                        <div class="tip-box">
+                                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                            <div><strong>팁:</strong> 변화의 폭이 작을수록 애니메이션이 부드러워지고, 변화가 불규칙하면 스탑모션 특유의 재밌고 귀여운 툭툭 끊기는 감성이 살아납니다.</div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 3</span>
+                                <h4>페이지 재생 시간(Timing) 0.1~0.3초 괄호 설정 & MP4 / GIF 다운로드</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>상단 도구 모음의 시계 모양 아이콘 <strong>[시간 (Timing)]</strong>을 클릭합니다.</li>
+                                    <li>시간 슬라이더를 조절하여 <strong><code>0.2초</code></strong> (속도감을 원하면 <code>0.1초</code>)로 변경합니다.</li>
+                                    <li>하단의 <strong>[모든 페이지에 적용 (Apply to all pages)]</strong> 버튼을 반드시 클릭하여 전체 페이지 속도를 통일합니다.</li>
+                                    <li>우측 상단 <strong>[재생(Play)]</strong> 버튼을 눌러 스탑모션 영상을 미리보기 테스트합니다.</li>
+                                    <li><strong>[공유] ➔ [다운로드]</strong> ➔ 파일 유형을 <code>MP4 동영상</code> 또는 <code>숏폼/웹용 GIF</code>로 지정하여 내보냅니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="5">
+                                    <li><label><input type="checkbox" class="task-check"> 최소 10개 이상의 연속 복제 페이지 생성 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 각 페이지마다 오브젝트의 위치/회전/크기 미세 조절 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 전체 페이지 재생 시간을 0.1~0.3초로 일괄 설정 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> MP4 비디오 또는 GIF 애니메이션 파일 내보내기 성공</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL 6 -->
+                <section id="tutorial-6" class="tutorial-section">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>크몽, 에이블리, 굿노트(Goodnotes) 마켓, 엣시(Etsy) 등에서 실제 수익화가 가능한 <strong>디지털 워크시트지(플래너/가계부/스터디 플래너)</strong>를 제작하고, 클릭하면 해당 페이지로 바로 이동하는 <strong>클릭가능한 하이퍼링크(Hyperlink) PDF</strong>를 완성합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 1</span>
+                                <h4>디지털 워크시트 규격 설정 및 표(Table) 서식 작성</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>캔버스 크기: <code>A4 세로 (210 x 297 mm)</code> 또는 태블릿 전용 <code>US Letter / iPad Screen Size</code>.</li>
+                                    <li>[요소] 탭에서 <strong>'표 (Table)'</strong>를 검색하여 추가합니다.</li>
+                                    <li>행과 열을 추가/삭제하여 워크시트 레이아웃(예: <code>날짜 | 시간 | 할 일 | 완료 여부 | 메모</code>)을 구성합니다.</li>
+                                    <li>표 테두리 색상, 두께, 셀 배경색(파스텔 톤 권장)을 브랜드 스타일에 맞춰 깔끔하게 정돈합니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 2</span>
+                                <h4>다중 페이지 구성 & 탭 목업 네비게이션 만들기</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>페이지를 추가하여 총 5페이지를 만듭니다 (1p: 표지, 2p: 연간 플래너, 3p: 월간 플래너, 4p: 주간 플래너, 5p: 모눈 노트).</li>
+                                    <li>우측 사이드에 다이어리 색인 탭 느낌의 <strong>[사각형 도형]</strong> 4개를 세로로 배치합니다 (탭 이름: <code>YEAR</code>, <code>MONTH</code>, <code>WEEK</code>, <code>NOTE</code>).</li>
+                                    <li>이 탭 디자인을 모든 페이지의 동일한 위치에 복사/붙여넣기(<code>Ctrl + C ➔ Ctrl + V</code>)합니다.</li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">STEP 3</span>
+                                <h4>핵심! 인터랙티브 하이퍼링크(Link) 연결 & PDF 다운로드</h4>
+                            </div>
+                            <div class="step-body">
+                                <ol class="instruction-list">
+                                    <li>1페이지의 <code>MONTH</code> 탭 버튼 요소를 선택하고 마우스 우클릭 ➔ <strong>[링크 (Link)]</strong> (단축키 <code>Ctrl + K</code>)를 클릭합니다.</li>
+                                    <li>링크 입력창에 외부 URL 대신 하단 <strong>'디자인의 페이지'</strong> 목록 중 <code>3페이지 (월간 플래너)</code>를 선택 연결합니다.</li>
+                                    <li>동일한 방식으로 모든 탭에 해당 페이지 번호를 매핑 링크 걸어줍니다.</li>
+                                    <li><strong>상업적 다운로드 설정:</strong>
+                                        <ul>
+                                            <li>우측 상단 <strong>[공유] ➔ [다운로드]</strong> 클릭.</li>
+                                            <li>파일 유형: <strong><code>PDF 인쇄 (PDF Print)</code></strong> 또는 <strong><code>PDF 표준 (PDF Standard)</code></strong> (디지털 기기 사용용은 Standard 추천).</li>
+                                            <li>태블릿 굿노트/노타빌리티 앱에서 열었을 때 탭을 터치하면 해당 위치로 즉시 이동합니다!</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="6">
+                                    <li><label><input type="checkbox" class="task-check"> 표(Table) 도구를 활용한 체계적인 워크시트 양식 설계 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 다중 페이지(표지+내지들) 구성 및 사이드 Index 탭 디자인 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> [링크 (Ctrl+K)] 기능으로 탭 클릭 시 해당 페이지 이동 연결 완료</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> 하이퍼링크가 작동하는 PDF 파일로 내보내기 성공</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- TUTORIAL 7 -->
+                <section id="tutorial-7" class="tutorial-section">
+                    <div class="intro-card">
+                        <div class="intro-icon"><i class="fa-solid fa-robot"></i></div>
+                        <div class="intro-info">
+                            <h3>학습 목표</h3>
+                            <p>캔바의 최신 <strong>AI 도구 5가지(Magic Media, Magic Edit, Magic Eraser, Magic Design, Text to Graphic)</strong>를 직접 활용하여 독창적인 인공지능 디지털 작품 5개 이상을 신속하게 생성하는 기술을 습득합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="step-container">
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">AI TOOL 1</span>
+                                <h4>Magic Media - 텍스트로 고화질 일러스트/사진 생성</h4>
+                            </div>
+                            <div class="step-body">
+                                <p class="tool-desc">원하는 장면을 글로 묘사하면 캔바 AI가 몇 초 만에 4장의 고화질 이미지로 그려냅니다.</p>
+                                <div class="prompt-code-block">
+                                    <span class="prompt-text" id="prompt-ai-1">Cute fluffy cat wearing futuristic astronaut helmet, space station background, cinematic lighting, 3D render, Pixar style --ar 1:1</span>
+                                    <button class="copy-btn" data-copy="prompt-ai-1"><i class="fa-regular fa-copy"></i> 프롬프트 복사</button>
+                                </div>
+                                <div class="ai-result-badge"><i class="fa-solid fa-image"></i> 작품 #1 생성 완료</div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">AI TOOL 2</span>
+                                <h4>Magic Edit (매직 편집) - 부분 수정 및 오브젝트 교체</h4>
+                            </div>
+                            <div class="step-body">
+                                <p class="tool-desc">이미지의 특정 부분만 브러시로 문지르고 프롬프트를 입력해 새로운 물체로 감쪽같이 합성 변경합니다.</p>
+                                <ol class="instruction-list">
+                                    <li>사진 클릭 ➔ [사진 편집] ➔ <strong>[Magic Edit]</strong> 클릭.</li>
+                                    <li>인물이 들고 있는 '커피 잔' 부분을 브러시로 칠합니다.</li>
+                                    <li>요청창에 <code>화려한 장미 꽃다발</code> 입력 후 [생성] 클릭 ➔ 커피 잔이 꽃다발로 자연스럽게 변환!</li>
+                                </ol>
+                                <div class="ai-result-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> 작품 #2 생성 완료</div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">AI TOOL 3</span>
+                                <h4>Magic Eraser (매직 지우개) - 불필요한 요소 흔적 없이 지우기</h4>
+                            </div>
+                            <div class="step-body">
+                                <p class="tool-desc">배경에 있는 전선, 지나가는 사람, 지저분한 흠집을 브러시질 한 번으로 주변 복원하며 지웁니다.</p>
+                                <ol class="instruction-list">
+                                    <li>[사진 편집] ➔ <strong>[Magic Eraser]</strong> 선택.</li>
+                                    <li>지우고 싶은 불필요한 배경 요소를 쓱쓱 문지르면 주변 배경 픽셀을 AI가 자동 합성하며 완벽 제거.</li>
+                                </ol>
+                                <div class="ai-result-badge"><i class="fa-solid fa-eraser"></i> 작품 #3 생성 완료</div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">AI TOOL 4</span>
+                                <h4>Magic Design (매직 디자인) - 키워드로 완성형 템플릿 자동 제안</h4>
+                            </div>
+                            <div class="step-body">
+                                <p class="tool-desc">내가 가진 사진과 주제 텍스트만 넣으면 AI가 레이아웃, 폰트, 컬러가 완료된 디자인을 통째로 제작합니다.</p>
+                                <div class="prompt-code-block">
+                                    <span class="prompt-text" id="prompt-ai-4">여름 시즌 한정 수박주스 할인 이벤트 카드뉴스 포스터</span>
+                                    <button class="copy-btn" data-copy="prompt-ai-4"><i class="fa-regular fa-copy"></i> 프롬프트 복사</button>
+                                </div>
+                                <div class="ai-result-badge"><i class="fa-solid fa-object-group"></i> 작품 #4 생성 완료</div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">AI TOOL 5</span>
+                                <h4>Text to Graphic - 벡터 스티커 & 아이콘 3D 무한 생성</h4>
+                            </div>
+                            <div class="step-body">
+                                <p class="tool-desc">[요소] 탭에서 원하는 스티커 그래픽을 AI 프롬프트로 고품질 벡터 아이콘으로 생성합니다.</p>
+                                <div class="prompt-code-block">
+                                    <span class="prompt-text" id="prompt-ai-5">3D glossy isometric gold trophy coin icon, isolated transparent background</span>
+                                    <button class="copy-btn" data-copy="prompt-ai-5"><i class="fa-regular fa-copy"></i> 프롬프트 복사</button>
+                                </div>
+                                <div class="ai-result-badge"><i class="fa-solid fa-shapes"></i> 작품 #5 생성 완료</div>
+                            </div>
+                        </article>
+
+                        <article class="step-card">
+                            <div class="step-header">
+                                <span class="step-tag">CHECKLIST</span>
+                                <h4>실습 체크리스트 (5개 이상 AI 작품 컬렉션)</h4>
+                            </div>
+                            <div class="step-body">
+                                <ul class="checklist-group" data-tutorial="7">
+                                    <li><label><input type="checkbox" class="task-check"> Magic Media 프롬프트로 AI 생성 사진/일러스트 제작 (작품1)</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> Magic Edit 기능으로 사진 부분 요소 변환 합성 (작품2)</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> Magic Eraser로 지저분한 오염/배경 요소 지우기 (작품3)</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> Magic Design을 활용한 프롬프트 기반 자동 카드뉴스 생성 (작품4)</label></li>
+                                    <li><label><input type="checkbox" class="task-check"> Text to Graphic 기능으로 3D 스티커/아이콘 요소 생성 (작품5)</label></li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">클립보드에 복사되었습니다!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
