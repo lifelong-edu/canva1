@@ -38,52 +38,52 @@
             </div>
 
             <nav class="nav-menu">
-                <button class="nav-btn active" data-target="tutorial-1" data-open-date="2026-09-09">
+                <button class="nav-btn active" data-target="tutorial-1" data-open-date="2026-09-09T19:00:00">
                     <span class="nav-num">01</span>
                     <span class="nav-title">그리드, 프레임 & 글씨효과</span>
-                    <span class="open-date-badge">2026.09.09</span>
+                    <span class="open-date-badge">2026.09.09 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t1"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-2" data-open-date="2026-09-16">
+                <button class="nav-btn" data-target="tutorial-2" data-open-date="2026-09-16T19:00:00">
                     <span class="nav-num">02</span>
                     <span class="nav-title">POP 글씨 홍보물</span>
-                    <span class="open-date-badge">2026.09.16</span>
+                    <span class="open-date-badge">2026.09.16 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t2"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-3" data-open-date="2026-09-23">
+                <button class="nav-btn" data-target="tutorial-3" data-open-date="2026-09-23T19:00:00">
                     <span class="nav-num">03</span>
                     <span class="nav-title">디지털아트 & 목업 3가지</span>
-                    <span class="open-date-badge">2026.09.23</span>
+                    <span class="open-date-badge">2026.09.23 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t3"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-4" data-open-date="2026-09-30">
+                <button class="nav-btn" data-target="tutorial-4" data-open-date="2026-09-30T19:00:00">
                     <span class="nav-num">04</span>
                     <span class="nav-title">특수 미러링 효과 상세페이지</span>
-                    <span class="open-date-badge">2026.09.30</span>
+                    <span class="open-date-badge">2026.09.30 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t4"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-5" data-open-date="2026-10-07">
+                <button class="nav-btn" data-target="tutorial-5" data-open-date="2026-10-07T19:00:00">
                     <span class="nav-num">05</span>
                     <span class="nav-title">재밌는 스탑모션 영상</span>
-                    <span class="open-date-badge">2026.10.07</span>
+                    <span class="open-date-badge">2026.10.07 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t5"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-6" data-open-date="2026-10-14">
+                <button class="nav-btn" data-target="tutorial-6" data-open-date="2026-10-14T19:00:00">
                     <span class="nav-num">06</span>
                     <span class="nav-title">돈버는 디지털 워크시트지</span>
-                    <span class="open-date-badge">2026.10.14</span>
+                    <span class="open-date-badge">2026.10.14 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t6"></i>
                 </button>
-                <button class="nav-btn" data-target="tutorial-7" data-open-date="2026-10-21">
+                <button class="nav-btn" data-target="tutorial-7" data-open-date="2026-10-21T19:00:00">
                     <span class="nav-num">07</span>
                     <span class="nav-title">캔바 AI로 작품 5개+</span>
-                    <span class="open-date-badge">2026.10.21</span>
+                    <span class="open-date-badge">2026.10.21 19:00</span>
                     <i class="fa-solid fa-circle-check check-icon" id="check-t7"></i>
                 </button>
             </nav>
 
             <div class="sidebar-footer">
-                <button id="toggle-admin-mode" class="admin-mode-btn" style="display: none;"><i class="fa-solid fa-unlock-keyhole"></i> [관리자/강사] 전체 잠금 해제</button>
+                <button id="open-admin-modal-btn" class="admin-mode-btn"><i class="fa-solid fa-key"></i> 관리자 모드 진입</button>
                 <button id="reset-progress-btn" class="reset-btn"><i class="fa-solid fa-rotate-left"></i> 진도율 초기화</button>
             </div>
         </aside>
@@ -745,6 +745,24 @@
 
             </div>
         </main>
+    </div>
+
+    <!-- Admin Password Modal -->
+    <div id="admin-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <i class="fa-solid fa-user-shield"></i>
+                <h3>관리자 인증</h3>
+            </div>
+            <p>관리자 암호를 입력하면 모든 튜토리얼이 해제됩니다.</p>
+            <form id="admin-auth-form">
+                <input type="password" id="admin-password-input" placeholder="비밀번호 입력" autocomplete="off" required>
+                <div class="modal-actions">
+                    <button type="button" id="close-admin-modal-btn" class="modal-cancel-btn">취소</button>
+                    <button type="submit" class="modal-submit-btn">인증하기</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Toast Notification -->

@@ -76,27 +76,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Date Locking Logic ---
+    // --- Date Locking Logic (KST 19:00 Precision) ---
     function applyDateLocking() {
-        const today = new Date();
-        // Today string format YYYY-MM-DD
-        const todayStr = today.toISOString().split('T')[0];
+        const now = new Date();
 
         navButtons.forEach(btn => {
             const openDateStr = btn.getAttribute('data-open-date');
-            const targetId = btn.getAttribute('data-target');
             const badgeEl = btn.querySelector('.open-date-badge');
 
             if (!openDateStr) return;
 
-            const isFuture = openDateStr > todayStr && !isAdminUnlocked;
+            const openTargetDate = new Date(openDateStr);
+            const isFuture = now < openTargetDate && !isAdminUnlocked;
+
+            // Format date for display: YYYY.MM.DD 19:00
+            const formattedDateDisplay = `${openDateStr.substring(0, 10).replace(/-/g, '.')} 19:00`;
 
             if (isFuture) {
                 btn.classList.add('locked');
-                if (badgeEl) badgeEl.textContent = `🔒 ${openDateStr.replace(/-/g, '.')} 오픈`;
+                if (badgeEl) badgeEl.textContent = `🔒 ${formattedDateDisplay} 오픈`;
             } else {
                 btn.classList.remove('locked');
-                if (badgeEl) badgeEl.textContent = openDateStr.replace(/-/g, '.');
+                if (badgeEl) badgeEl.textContent = formattedDateDisplay;
             }
         });
 
@@ -129,55 +130,82 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Secret Admin Reveal (URL query ?admin=true OR click logo 3 times)
-        const urlParams = new URLSearchParams(window.location.search);
-        let isAdminAuthorized = urlParams.get('admin') === 'true' || localStorage.getItem('canva_admin_revealed') === 'true';
+        // Admin Password Modal Logic (Passcode: 106406)
+        const openAdminModalBtn = document.getElementById('open-admin-modal-btn');
+        const closeAdminModalBtn = document.getElementById('close-admin-modal-btn');
+        const adminModal = document.getElementById('admin-modal');
+        const adminAuthForm = document.getElementById('admin-auth-form');
+        const adminPasswordInput = document.getElementById('admin-password-input');
 
-        if (adminToggleBtn) {
-            if (isAdminAuthorized) {
-                adminToggleBtn.style.display = 'block';
-            } else {
-                adminToggleBtn.style.display = 'none';
-            }
+        const ADMIN_PASSCODE = '106406';
 
-            // Triple click logo to reveal admin button secretly
-            const logoBadge = document.querySelector('.logo-container');
-            let logoClickCount = 0;
-            let logoClickTimer;
+        // Check if admin mode was previously unlocked in localStorage session
+        if (localStorage.getItem('canva_admin_session_unlocked') === 'true') {
+            isAdminUnlocked = true;
+            updateAdminButtonUI();
+        }
 
-            if (logoBadge) {
-                logoBadge.style.cursor = 'pointer';
-                logoBadge.addEventListener('click', () => {
-                    logoClickCount++;
-                    clearTimeout(logoClickTimer);
-
-                    if (logoClickCount >= 3) {
-                        isAdminAuthorized = true;
-                        localStorage.setItem('canva_admin_revealed', 'true');
-                        adminToggleBtn.style.display = 'block';
-                        showToast('🔑 관리자 모드 버튼이 활성화되었습니다!');
-                        logoClickCount = 0;
-                    } else {
-                        logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 1000);
-                    }
-                });
-            }
-
-            adminToggleBtn.addEventListener('click', () => {
-                isAdminUnlocked = !isAdminUnlocked;
+        if (openAdminModalBtn) {
+            openAdminModalBtn.addEventListener('click', () => {
                 if (isAdminUnlocked) {
-                    adminToggleBtn.innerHTML = `<i class="fa-solid fa-lock"></i> 날짜 잠금 모드로 변경`;
-                    adminToggleBtn.style.background = 'rgba(239, 68, 68, 0.2)';
-                    adminToggleBtn.style.color = '#f87171';
-                    showToast('🔓 [관리자 모드] 모든 튜토리얼이 해제되었습니다.');
+                    // Toggle back to normal student mode
+                    isAdminUnlocked = false;
+                    localStorage.removeItem('canva_admin_session_unlocked');
+                    updateAdminButtonUI();
+                    applyDateLocking();
+                    showToast('🔒 일반 수강생 모드로 전환되었습니다.');
                 } else {
-                    adminToggleBtn.innerHTML = `<i class="fa-solid fa-unlock-keyhole"></i> [관리자/강사] 전체 잠금 해제`;
-                    adminToggleBtn.style.background = 'rgba(139, 92, 246, 0.12)';
-                    adminToggleBtn.style.color = 'var(--canva-cyan)';
-                    showToast('🔒 날짜 잠금 규칙이 다시 적용되었습니다.');
+                    // Open modal for passcode
+                    adminPasswordInput.value = '';
+                    adminModal.classList.add('active');
+                    setTimeout(() => adminPasswordInput.focus(), 100);
                 }
-                applyDateLocking();
             });
+        }
+
+        if (closeAdminModalBtn) {
+            closeAdminModalBtn.addEventListener('click', () => {
+                adminModal.classList.remove('active');
+            });
+        }
+
+        if (adminModal) {
+            adminModal.addEventListener('click', (e) => {
+                if (e.target === adminModal) {
+                    adminModal.classList.remove('active');
+                }
+            });
+        }
+
+        if (adminAuthForm) {
+            adminAuthForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const inputVal = adminPasswordInput.value.trim();
+
+                if (inputVal === ADMIN_PASSCODE) {
+                    isAdminUnlocked = true;
+                    localStorage.setItem('canva_admin_session_unlocked', 'true');
+                    adminModal.classList.remove('active');
+                    updateAdminButtonUI();
+                    applyDateLocking();
+                    showToast('🔓 [관리자 인증 성공] 모든 튜토리얼이 해제되었습니다!');
+                } else {
+                    alert('비밀번호가 올바르지 않습니다. 다시 확인해 주세요.');
+                    adminPasswordInput.value = '';
+                    adminPasswordInput.focus();
+                }
+            });
+        }
+
+        function updateAdminButtonUI() {
+            if (!openAdminModalBtn) return;
+            if (isAdminUnlocked) {
+                openAdminModalBtn.innerHTML = `<i class="fa-solid fa-lock"></i> 관리자 모드 종료`;
+                openAdminModalBtn.classList.add('unlocked');
+            } else {
+                openAdminModalBtn.innerHTML = `<i class="fa-solid fa-key"></i> 관리자 모드 진입`;
+                openAdminModalBtn.classList.remove('unlocked');
+            }
         }
 
         // Checkbox state changes
@@ -263,11 +291,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!existingLockCard) {
                     existingLockCard = document.createElement('div');
                     existingLockCard.className = 'locked-card';
+                    const displayFormattedDate = `${openDateStr.substring(0, 10).replace(/-/g, '.')} 19:00 (오후 7시)`;
                     existingLockCard.innerHTML = `
                         <i class="fa-solid fa-lock lock-main-icon"></i>
                         <h3>아직 공개되지 않은 튜토리얼입니다</h3>
                         <p>정해진 개강 일정에 맞춰 순차적으로 튜토리얼이 오픈됩니다.</p>
-                        <div class="locked-date-highlight"><i class="fa-regular fa-calendar-check"></i> 공개 예정일: ${openDateStr.replace(/-/g, '.')}</div>
+                        <div class="locked-date-highlight"><i class="fa-regular fa-calendar-check"></i> 공개 예정 일시: ${displayFormattedDate}</div>
                     `;
                     sec.appendChild(existingLockCard);
                 } else {
