@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initTheme();
         bindEvents();
         loadSavedProgress();
-        applyDateLocking();
+        applyOpenStates();
         updateOverallProgress();
     }
 
